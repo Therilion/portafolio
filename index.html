@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedro Escobar Céspedes — Ingeniero backend senior</title>
+<meta name="description" content="Ingeniero backend senior. Node.js y TypeScript, Kubernetes y cloud, sistemas en producción.">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pedescoces.cl/">
+<meta property="og:title" content="Pedro Escobar Céspedes — Ingeniero backend senior">
+<meta property="og:description" content="Node.js y TypeScript, Kubernetes y cloud, sistemas en producción.">
+<meta property="og:locale" content="es_CL">
+<meta name="twitter:card" content="summary">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="masthead">
+  <h1>Pedro Escobar Céspedes</h1>
+  <p class="lede">Ingeniero backend senior. Node.js y TypeScript, Kubernetes y cloud, sistemas en producción.</p>
+  <p class="masthead-links">
+    <a href="mailto:pedescoces@gmail.com">pedescoces@gmail.com</a>
+    <a href="https://www.linkedin.com/in/pedescoces/" rel="me">LinkedIn</a>
+    <a href="https://github.com/Therilion" rel="me">GitHub</a>
+  </p>
+</header>
+
+<main>
+
+  <section class="cases" aria-label="Casos">
+
+    <article class="case">
+      <h2>Cuando la plataforma apaga el runtime bajo tus pies</h2>
+
+      <div class="row">
+        <h3 class="row-label">Contexto</h3>
+        <div class="row-body">
+          <p>Backend de una plataforma de videojuegos móviles, en Globant. Estuve seis años en el proyecto, los últimos tres como líder técnico de backend.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-label">El problema</h3>
+        <div class="row-body">
+          <p>La lógica de servidor vivía en PlayFab CloudScript, un entorno cerrado: solo JavaScript básico, sin librerías externas de Node, sin operaciones asíncronas y con un límite duro de tiempo de ejecución por función. Cada funcionalidad nueva se peleaba contra el runtime. Cuando PlayFab habilitó la integración con Azure Functions, empezamos a sacar de ahí los módulos que más dolían: registro de partidas, apertura de cofres por tiempo y el resolutor de premios con distribución uniforme.</p>
+          <p>El proyecto se cerró y quedó sin mantención cerca de un año. Al retomarlo para relanzarlo como plataforma, PlayFab ya había eliminado el soporte de CloudScript: todo lo que no se había migrado dejaba de tener futuro. El equipo ahora éramos dos, yo y un desarrollador junior, donde antes habían sido seis solo en backend.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-label">Qué decidí</h3>
+        <div class="row-body">
+          <p>Llevar el backend completo a un monolito contenerizado sobre AKS, en vez de seguir migrando endpoint por endpoint a Azure Functions. Escribí una capa de adaptadores que traducía las llamadas existentes al nuevo backend, de modo que no hubo que reescribir cada endpoint para levantar el sistema. Hice la migración completa: la infraestructura de Kubernetes y el código adaptador.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-label">Por qué eso y no lo obvio</h3>
+        <div class="row-body">
+          <p>Migrar función por función era el camino evidente, y con dos personas también el más largo: meses con el sistema a medias. Los adaptadores invertían el orden — primero todo el servicio en pie, después el ordenamiento interno.</p>
+          <p>Kubernetes tampoco fue preferencia personal. Por sus años anteriores conocíamos el perfil de carga del juego: consulta constante de datos y actividad a toda hora. El escalamiento por función no calzaba con esa forma de carga, y un backend contenerizado daba control explícito sobre cómo y cuándo escalar antes de volver a abrirlo a usuarios.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-label">Qué pasó</h3>
+        <div class="row-body">
+          <p>El backend quedó operativo sobre AKS, con despliegues automatizados por CI/CD, y las funcionalidades pendientes se habilitaron en mucho menos tiempo del que habría tomado la migración pieza por pieza. La migración también redujo el amarre a servicios de Azure: el envío masivo de mensajes, que estaba sobre Service Bus, se reimplementó con RabbitMQ dentro del cluster. La plataforma quedó lista para recibir nuevos clientes; el proyecto comercial no prosperó y se cerró cerca de un año después.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="case">
+      <h2>Construir el framework que el runtime no traía</h2>
+
+      <div class="row">
+        <h3 class="row-label">Contexto</h3>
+        <div class="row-body">
+          <p>Mismo backend de juegos móviles. Etapa de CloudScript y, después, Azure Functions.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-label">El problema</h3>
+        <div class="row-body">
+          <p>CloudScript no es un servidor: cada endpoint es una función suelta, sin pipeline de request, sin middlewares, sin manejo central de errores. Todo lo transversal —validar, registrar quién llamó, capturar lo que falla— se repetía endpoint por endpoint.</p>
+          <p>Y diagnosticar en producción significaba, casi siempre, reproducir el error por cuenta propia: los logs del entorno tardaban segundos en aparecer, así que no servían para seguir un problema en curso. Mandarlos a Splunk tenía su propia traba: por volumen era inviable una llamada HTTP por registro, y el entorno tenía un tope acotado de llamadas externas por ejecución. Cada log competía con las llamadas que la funcionalidad necesitaba de verdad.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-label">Qué decidí</h3>
+        <div class="row-body">
+          <p>Construir las dos piezas que faltaban.</p>
+          <p>Un manejador de middlewares al estilo Express: cadena de funciones con un contexto compartido, manejadores de error declarados aparte y propagación automática hacia ellos. Cada endpoint pasó a declarar su cadena en vez de repetir lo mismo.</p>
+          <p>Y sobre ese contexto, un logger que acumula registros en un buffer y los despacha por lote, al llenarse el buffer o tras unos segundos sin registros nuevos. Niveles de severidad tipo syslog con umbral configurable por entorno, reintento con backoff exponencial, y devolución de los mensajes al buffer cuando el envío falla, para no perderlos. Cada evento lleva identificadores de request, de proceso y de sesión, compartidos con el cliente de juego, de modo que una acción del jugador se sigue de punta a cabo.</p>
+          <p>Al pasar a Azure Functions rehíce el gestor como asíncrono, para que los procesos que seguían corriendo en background pudieran seguir escribiendo en vez de perder sus logs al cerrar el request.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-label">Por qué eso y no lo obvio</h3>
+        <div class="row-body">
+          <p>Emitir cada log al momento era lo directo, y habría funcionado hasta chocar con el límite de llamadas externas y empezar a competir con la lógica del juego. El buffer convierte un costo por registro en un costo por lote. Y repetir la lógica transversal en cada endpoint también funciona — hasta que los endpoints son decenas y cada cambio hay que hacerlo en todos.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-label">Qué pasó</h3>
+        <div class="row-body">
+          <p>Seguir un problema pasó a ser filtrar por ventana de tiempo o por identificador de request, en lugar de reproducirlo a mano. En un incidente en producción, con el registro de finalización de partidas fallando, fue un log de Elasticsearch el que reveló la causa: el almacenamiento había llegado al límite; se reaprovisionaron los servicios y el sistema volvió a operar. Más tarde, en la migración a AKS, moví los logs a exposición directa desde los pods: sin Splunk de por medio y con la infraestructura ya en nuestras manos, leerlos ahí era más simple.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="case">
+      <h2>Sacar del request lo que el jugador no necesita esperar</h2>
+
+      <div class="row">
+        <h3 class="row-label">Contexto</h3>
+        <div class="row-body">
+          <p>Mismo backend de juegos móviles, en producción. Etapa de Azure Functions.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-label">El problema</h3>
+        <div class="row-body">
+          <p>Dos operaciones centrales se habían vuelto lentas de cara al jugador. La finalización de una partida arrastraba una cadena larga de procesos asociados. Y la entrega de premios tardaba en responder, algo que se hizo evidente cuando empezaron a entregarse premios numerosos de una vez.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-label">Qué decidí</h3>
+        <div class="row-body">
+          <p>Primero, cachear según qué tan seguido cambia cada dato, con invalidación explícita en toda escritura. Los datos de configuración del juego, con caché de larga duración; el perfil del jugador, con caché de segundos, invalidado apenas el perfil se modifica por cualquier vía.</p>
+          <p>Para la configuración aproveché algo del protocolo: el cliente pide siempre una versión concreta de los datos. Publicar una versión nueva invalida el caché completo, y el primer dispositivo que la solicita lo deja caliente para todos los demás. Sin tarea de precalentamiento ni coordinación entre servicios — la primera petición real hace el trabajo.</p>
+          <p>Después, algo más de fondo: mover fuera del request lo que el cliente no necesita para continuar. En la finalización de partida, resolver temprano lo que determina el resultado y diferir la persistencia. En la entrega de premios, responder de inmediato con lo que el jugador recibe y dejar para después la entrega de productos y la actualización de estadísticas. Las entregas masivas pasaron al mismo esquema por lotes que los logs.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-label">Por qué eso y no lo obvio</h3>
+        <div class="row-body">
+          <p>Lo obvio era optimizar consultas y ampliar caché, y por un tiempo alcanzó. El techo llegó igual, porque las escrituras no eran lentas: estaban en el camino. El jugador necesita saber que ganó y qué recibió; no necesita esperar a que se actualicen sus estadísticas para ver la pantalla siguiente.</p>
+          <p>Responder antes de persistir es un canje, no una mejora gratis: abre una ventana en que el cliente ya avanzó y el backend todavía no escribió. Lo asumimos deliberadamente para estadísticas y entregas, donde el costo de un fallo aislado era bajo, y lo cubrimos con pruebas exhaustivas en desarrollo. Una política de reintentos quedó identificada como el siguiente paso.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h3 class="row-label">Qué pasó</h3>
+        <div class="row-body">
+          <p>Las dos operaciones pasaron a responder en el tiempo que toma resolver el resultado, no en el que toma guardarlo todo. El backend sostuvo el juego en producción con actividad a toda hora.</p>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="stack" aria-labelledby="stack-title">
+    <h2 id="stack-title">Stack</h2>
+
+    <div class="row">
+      <h3 class="row-label">Lenguajes</h3>
+      <div class="row-body"><p>TypeScript, JavaScript (Node.js)</p></div>
+    </div>
+    <div class="row">
+      <h3 class="row-label">Backend</h3>
+      <div class="row-body"><p>NestJS, Fastify, Express</p></div>
+    </div>
+    <div class="row">
+      <h3 class="row-label">Datos y mensajería</h3>
+      <div class="row-body"><p>PostgreSQL, MongoDB, MySQL, Redis, RabbitMQ, Kafka, Azure Service Bus</p></div>
+    </div>
+    <div class="row">
+      <h3 class="row-label">Cloud e infraestructura</h3>
+      <div class="row-body"><p>Azure, AWS, Kubernetes, Docker, CI/CD</p></div>
+    </div>
+    <div class="row">
+      <h3 class="row-label">Frontend</h3>
+      <div class="row-body"><p>React, Next.js</p></div>
+    </div>
+    <div class="row">
+      <h3 class="row-label">Prácticas</h3>
+      <div class="row-body"><p>Diseño técnico documentado, testing (Jest, Vitest), observabilidad</p></div>
+    </div>
+  </section>
+
+  <section class="now" aria-labelledby="now-title">
+    <h2 id="now-title">En qué estoy</h2>
+    <div class="prose">
+      <p>Hoy trabajo como desarrollador backend senior en un equipo de modernización, unificando consultas de catálogo distribuidas en múltiples países y unidades de negocio detrás de un único backend.</p>
+      <p>En paralelo desarrollo <a href="https://github.com/Therilion/podsync">PodSync</a>, una plataforma de grabación remota de podcasts con pistas de audio independientes por participante. La implementación está en etapa temprana; lo que sí está completo es el diseño: arquitectura, decisiones de stack y plan de trabajo, todo documentado y público en el repositorio.</p>
+      <p>Estoy cerrando un curso de arquitectura cloud. El trabajo práctico es sobre AWS, pero los conceptos son transversales a cualquier proveedor.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="contact" aria-labelledby="contact-title">
+  <h2 id="contact-title">Contacto</h2>
+  <p class="email"><a href="mailto:pedescoces@gmail.com">pedescoces@gmail.com</a></p>
+  <p class="contact-links">
+    <a href="https://www.linkedin.com/in/pedescoces/">LinkedIn</a>
+    <a href="https://github.com/Therilion">GitHub</a>
+  </p>
+</footer>
+
+</body>
+</html>

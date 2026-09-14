@@ -1,0 +1,239 @@
+:root {
+  --paper: #edefee;
+  --ink: #171b1a;
+  --muted: #5a6462;
+  --rule: #d2d7d4;
+  --accent: #17514c;
+
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+
+  --gutter: 11rem;
+  --gap: 2rem;
+  --measure: 38rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0 1.5rem 6rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+p { margin: 0 0 1.1em; }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--rule);
+}
+
+a:hover { text-decoration-color: var(--accent); color: var(--accent); }
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  text-decoration: none;
+}
+
+/* ---------- Encabezado ---------- */
+
+.masthead {
+  max-width: calc(var(--gutter) + var(--gap) + var(--measure));
+  margin: 0 auto;
+  padding: 6rem 0 3.5rem;
+}
+
+.masthead h1 {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: clamp(2rem, 6vw, 2.9rem);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.08;
+}
+
+.lede {
+  max-width: 34rem;
+  margin: 1.1rem 0 0;
+  font-size: clamp(1.1rem, 2.6vw, 1.32rem);
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.masthead-links {
+  margin: 2rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+}
+
+.masthead-links a { margin-right: 1.4rem; display: inline-block; }
+
+/* ---------- Retícula etiqueta / contenido ---------- */
+
+.row {
+  display: grid;
+  grid-template-columns: var(--gutter) minmax(0, var(--measure));
+  column-gap: var(--gap);
+  margin-bottom: 2.1rem;
+}
+
+.row:last-child { margin-bottom: 0; }
+
+.row-label {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.005em;
+  color: var(--accent);
+  text-align: right;
+  padding-top: 0.42em;
+}
+
+.row-body { min-width: 0; }
+
+/* ---------- Casos ---------- */
+
+main {
+  max-width: calc(var(--gutter) + var(--gap) + var(--measure));
+  margin: 0 auto;
+}
+
+.case {
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.case:first-child { border-top: 1px solid var(--ink); }
+
+.case h2 {
+  margin: 0 0 2.4rem;
+  margin-left: calc(var(--gutter) + var(--gap));
+  max-width: var(--measure);
+  font-family: var(--sans);
+  font-size: clamp(1.35rem, 3.6vw, 1.72rem);
+  font-weight: 500;
+  letter-spacing: -0.014em;
+  line-height: 1.22;
+}
+
+/* ---------- Stack y En qué estoy ---------- */
+
+.stack,
+.now {
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.stack h2,
+.now h2 {
+  margin: 0 0 2.2rem;
+  margin-left: calc(var(--gutter) + var(--gap));
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.stack .row { margin-bottom: 1.15rem; }
+
+.stack .row-body {
+  font-family: var(--sans);
+  font-size: 0.97rem;
+  line-height: 1.5;
+}
+
+.now .prose {
+  margin-left: calc(var(--gutter) + var(--gap));
+  max-width: var(--measure);
+}
+
+/* ---------- Contacto ---------- */
+
+.contact {
+  max-width: calc(var(--gutter) + var(--gap) + var(--measure));
+  margin: 0 auto;
+  padding: 3.5rem 0 0;
+  border-top: 1px solid var(--ink);
+}
+
+.contact h2 {
+  margin: 0 0 1.6rem;
+  margin-left: calc(var(--gutter) + var(--gap));
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.email,
+.contact-links {
+  margin-left: calc(var(--gutter) + var(--gap));
+  font-family: var(--sans);
+}
+
+.email {
+  margin-bottom: 0.7rem;
+  font-size: clamp(1.15rem, 3.2vw, 1.4rem);
+  font-weight: 500;
+}
+
+.email a { text-decoration-color: var(--accent); }
+
+.contact-links { font-size: 0.95rem; }
+.contact-links a { margin-right: 1.4rem; }
+
+/* ---------- Angosto ---------- */
+
+@media (max-width: 46rem) {
+  body { padding: 0 1.25rem 4rem; }
+
+  .masthead { padding: 3.5rem 0 2.5rem; }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.35rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .row-label {
+    text-align: left;
+    padding-top: 0;
+  }
+
+  .case,
+  .stack,
+  .now,
+  .contact { padding-top: 2.75rem; padding-bottom: 2.75rem; }
+
+  .contact { padding-bottom: 0; }
+
+  .case h2,
+  .stack h2,
+  .now h2,
+  .contact h2,
+  .now .prose,
+  .email,
+  .contact-links { margin-left: 0; }
+
+  .case h2 { margin-bottom: 1.8rem; }
+  .stack h2, .now h2, .contact h2 { margin-bottom: 1.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
