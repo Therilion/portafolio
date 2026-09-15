@@ -316,8 +316,15 @@ main {
   .email,
   .contact-links { margin-left: 0; }
 
-  .case h2 { margin-bottom: 2rem; padding-top: 1.1rem; }
-  .case h2::before { top: 0; left: 0; }
+  /* Sin canalón, el marcador se alinea a la izquierda de la primera línea
+     y el título sangra para dejarle sitio */
+  .case h2 {
+    margin-bottom: 2rem;
+    padding-left: 1.15rem;
+  }
+
+  .case h2::before { top: 0.52em; left: 0; }
+
   .stack h2, .now h2, .contact h2 { margin-bottom: 1.6rem; }
 }
 
