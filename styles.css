@@ -1,35 +1,51 @@
 :root {
-  --paper: #edefee;
-  --ink: #171b1a;
-  --muted: #5a6462;
-  --rule: #d2d7d4;
-  --accent: #17514c;
+  --ground: #0f1416;
+  --ink: #e7e5dc;
+  --muted: #9ba5a3;
+  --rule: #263033;
+  --rule-strong: #3a464a;
+  --accent: #e0a13a;
+  --accent-dim: #8a6524;
 
   --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   --gutter: 11rem;
-  --gap: 2rem;
+  --gap: 2.5rem;
   --measure: 38rem;
+  --shell: calc(var(--gutter) + var(--gap) + var(--measure));
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--ground);
+  color-scheme: dark;
+}
 
 body {
   margin: 0;
-  padding: 0 1.5rem 6rem;
-  background: var(--paper);
+  padding: 0 1.5rem 7rem;
+  background-color: var(--ground);
+  background-image:
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(to right, rgba(224, 161, 58, 0.045) 0 1px, transparent 1px 32px),
+    repeating-linear-gradient(to bottom, rgba(224, 161, 58, 0.045) 0 1px, transparent 1px 32px),
+    radial-gradient(120% 80% at 50% 0%, #161d20 0%, var(--ground) 62%);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--serif);
   font-size: 1.0625rem;
-  line-height: 1.62;
+  line-height: 1.68;
   font-kerning: normal;
   -webkit-font-smoothing: antialiased;
 }
 
-p { margin: 0 0 1.1em; }
+::selection { background: var(--accent-dim); color: #fff; }
+
+p { margin: 0 0 1.15em; }
 p:last-child { margin-bottom: 0; }
 
 a {
@@ -37,10 +53,10 @@ a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
-  text-decoration-color: var(--rule);
+  text-decoration-color: var(--rule-strong);
 }
 
-a:hover { text-decoration-color: var(--accent); color: var(--accent); }
+a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
 a:focus-visible {
   outline: 2px solid var(--accent);
@@ -51,35 +67,51 @@ a:focus-visible {
 /* ---------- Encabezado ---------- */
 
 .masthead {
-  max-width: calc(var(--gutter) + var(--gap) + var(--measure));
+  display: flex;
+  flex-direction: column;
+  max-width: var(--shell);
   margin: 0 auto;
-  padding: 6rem 0 3.5rem;
+  padding: 4.5rem 0 4rem;
 }
 
 .masthead h1 {
-  margin: 0;
+  margin: 2rem 0 0;
   font-family: var(--sans);
-  font-size: clamp(2rem, 6vw, 2.9rem);
+  font-size: clamp(2.1rem, 7.2vw, 3.6rem);
   font-weight: 600;
-  letter-spacing: -0.022em;
-  line-height: 1.08;
+  letter-spacing: -0.032em;
+  line-height: 1.0;
+  color: #f3f1e8;
 }
 
 .lede {
-  max-width: 34rem;
-  margin: 1.1rem 0 0;
+  max-width: 33rem;
+  margin: 1.5rem 0 0;
   font-size: clamp(1.1rem, 2.6vw, 1.32rem);
-  line-height: 1.45;
+  line-height: 1.52;
   color: var(--muted);
 }
 
 .masthead-links {
-  margin: 2rem 0 0;
-  font-family: var(--sans);
-  font-size: 0.95rem;
+  order: -1;
+  margin: 0;
+  padding: 0.65rem 0;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-.masthead-links a { margin-right: 1.4rem; display: inline-block; }
+.masthead-links a {
+  display: inline-block;
+  margin-right: 1.7rem;
+  text-decoration-color: transparent;
+}
+
+.masthead-links a:hover { text-decoration-color: var(--accent); }
 
 /* ---------- Retícula etiqueta / contenido ---------- */
 
@@ -87,7 +119,7 @@ a:focus-visible {
   display: grid;
   grid-template-columns: var(--gutter) minmax(0, var(--measure));
   column-gap: var(--gap);
-  margin-bottom: 2.1rem;
+  margin-bottom: 2.5rem;
 }
 
 .row:last-child { margin-bottom: 0; }
@@ -95,13 +127,14 @@ a:focus-visible {
 .row-label {
   margin: 0;
   font-family: var(--sans);
-  font-size: 0.82rem;
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0.005em;
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.085em;
+  text-transform: uppercase;
   color: var(--accent);
   text-align: right;
-  padding-top: 0.42em;
+  padding-top: 0.62em;
 }
 
 .row-body { min-width: 0; }
@@ -109,52 +142,67 @@ a:focus-visible {
 /* ---------- Casos ---------- */
 
 main {
-  max-width: calc(var(--gutter) + var(--gap) + var(--measure));
+  max-width: var(--shell);
   margin: 0 auto;
 }
 
-.case {
-  padding: 3.5rem 0;
+.case,
+.stack,
+.now,
+.contact {
+  padding: 4.25rem 0;
   border-top: 1px solid var(--rule);
+  background-image: linear-gradient(to right, var(--accent) 0 100%);
+  background-repeat: no-repeat;
+  background-size: var(--gutter) 2px;
+  background-position: 0 -1px;
 }
 
-.case:first-child { border-top: 1px solid var(--ink); }
-
 .case h2 {
-  margin: 0 0 2.4rem;
+  position: relative;
+  margin: 0 0 2.6rem;
   margin-left: calc(var(--gutter) + var(--gap));
   max-width: var(--measure);
   font-family: var(--sans);
-  font-size: clamp(1.35rem, 3.6vw, 1.72rem);
+  font-size: clamp(1.4rem, 3.8vw, 1.95rem);
   font-weight: 500;
-  letter-spacing: -0.014em;
-  line-height: 1.22;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  color: #f3f1e8;
+  text-wrap: pretty;
+}
+
+.case h2::before {
+  content: "";
+  position: absolute;
+  top: 0.62em;
+  left: calc(-1 * var(--gap));
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
 }
 
 /* ---------- Stack y En qué estoy ---------- */
 
-.stack,
-.now {
-  padding: 3.5rem 0;
-  border-top: 1px solid var(--rule);
-}
-
 .stack h2,
-.now h2 {
-  margin: 0 0 2.2rem;
+.now h2,
+.contact h2 {
+  margin: 0 0 2.4rem;
   margin-left: calc(var(--gutter) + var(--gap));
-  font-family: var(--sans);
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-.stack .row { margin-bottom: 1.15rem; }
+.stack .row { margin-bottom: 1.35rem; }
 
 .stack .row-body {
   font-family: var(--sans);
   font-size: 0.97rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .now .prose {
@@ -165,19 +213,9 @@ main {
 /* ---------- Contacto ---------- */
 
 .contact {
-  max-width: calc(var(--gutter) + var(--gap) + var(--measure));
+  max-width: var(--shell);
   margin: 0 auto;
-  padding: 3.5rem 0 0;
-  border-top: 1px solid var(--ink);
-}
-
-.contact h2 {
-  margin: 0 0 1.6rem;
-  margin-left: calc(var(--gutter) + var(--gap));
-  font-family: var(--sans);
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  padding: 4.25rem 0 0;
 }
 
 .email,
@@ -187,27 +225,34 @@ main {
 }
 
 .email {
-  margin-bottom: 0.7rem;
-  font-size: clamp(1.15rem, 3.2vw, 1.4rem);
+  margin-bottom: 0.9rem;
+  font-size: clamp(1.2rem, 3.2vw, 1.5rem);
   font-weight: 500;
 }
 
 .email a { text-decoration-color: var(--accent); }
 
-.contact-links { font-size: 0.95rem; }
-.contact-links a { margin-right: 1.4rem; }
+.contact-links {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.contact-links a { margin-right: 1.7rem; }
 
 /* ---------- Angosto ---------- */
 
 @media (max-width: 46rem) {
-  body { padding: 0 1.25rem 4rem; }
+  body { padding: 0 1.25rem 4rem; background-attachment: scroll; }
 
-  .masthead { padding: 3.5rem 0 2.5rem; }
+  .masthead { padding: 2.5rem 0 3rem; }
+  .masthead h1 { margin-top: 1.6rem; }
 
   .row {
     grid-template-columns: minmax(0, 1fr);
-    row-gap: 0.35rem;
-    margin-bottom: 1.8rem;
+    row-gap: 0.4rem;
+    margin-bottom: 2rem;
   }
 
   .row-label {
@@ -218,7 +263,11 @@ main {
   .case,
   .stack,
   .now,
-  .contact { padding-top: 2.75rem; padding-bottom: 2.75rem; }
+  .contact {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background-size: 7rem 2px;
+  }
 
   .contact { padding-bottom: 0; }
 
@@ -230,8 +279,9 @@ main {
   .email,
   .contact-links { margin-left: 0; }
 
-  .case h2 { margin-bottom: 1.8rem; }
-  .stack h2, .now h2, .contact h2 { margin-bottom: 1.4rem; }
+  .case h2 { margin-bottom: 2rem; padding-top: 1.1rem; }
+  .case h2::before { top: 0; left: 0; }
+  .stack h2, .now h2, .contact h2 { margin-bottom: 1.6rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

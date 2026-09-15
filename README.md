@@ -4,7 +4,7 @@ Sitio personal de un ingeniero backend senior: tres casos de trabajo contados en
 (contexto, problema, decisión, alternativa descartada y resultado), el stack que uso y en
 qué estoy trabajando hoy.
 
-Publicado en **[pedescoces.cl](https://pedescoces.cl/)** mediante Cloudflare Pages.
+Publicado en **[pedescoces.cl](https://www.pedescoces.cl/)** mediante Cloudflare Pages.
 
 ## Estructura
 
@@ -14,7 +14,7 @@ styles.css    Estilos
 ```
 
 No hay framework, bundler ni dependencias: HTML y CSS servidos tal cual. La única
-dependencia externa es la tipografía IBM Plex (Sans y Serif) desde Google Fonts.
+dependencia externa es la tipografía IBM Plex (Sans, Serif y Mono) desde Google Fonts.
 
 ## Desarrollo local
 
@@ -45,7 +45,9 @@ repositorio.
   `El problema`, `Qué decidí`…) en una columna lateral que colapsa sobre el contenido en
   pantallas angostas.
 - **Ancho de lectura acotado.** El cuerpo se mantiene en una medida legible y en serif;
-  títulos, rótulos y datos del stack van en sans.
+  los títulos y el stack van en sans, y los rótulos de sección en mono versalitas.
+- **Paleta oscura, sin alternativa clara.** Fondo tinta con una retícula tenue y un acento
+  ámbar que marca los rótulos y el filete de cada sección. `color-scheme: dark` declarado.
 - **Accesibilidad.** HTML semántico, `aria-label` en las secciones, foco visible y respeto
   por `prefers-reduced-motion`.
 
