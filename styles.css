@@ -286,6 +286,18 @@ main {
   .masthead { padding: 2.5rem 0 3rem; }
   .masthead h1 { margin-top: 1.6rem; }
 
+  /* Los tres enlaces no caben en una línea. En vez de dejar que el salto caiga
+     donde toque, el correo —el más largo— se queda con la suya y los otros dos
+     comparten la siguiente. Ocupa el mismo alto que el salto natural. */
+  .masthead-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.5rem;
+  }
+
+  .masthead-links a { margin-right: 0; }
+  .masthead-links a:first-child { flex-basis: 100%; }
+
   .row {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 0.4rem;
