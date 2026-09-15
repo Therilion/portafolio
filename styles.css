@@ -296,7 +296,6 @@ main {
   }
 
   .masthead-links a { margin-right: 0; }
-  .masthead-links a:first-child { flex-basis: 100%; }
 
   .row {
     grid-template-columns: minmax(0, 1fr);
@@ -338,6 +337,13 @@ main {
   .case h2::before { top: 0.52em; left: 0; }
 
   .stack h2, .now h2, .contact h2 { margin-bottom: 1.6rem; }
+}
+
+/* Bajo 480px los tres enlaces no caben en una línea, o caben pegados al borde:
+   medido, el quiebre está en 400px de contenido. El correo pasa a ocupar la suya
+   y los otros dos comparten la siguiente. Por encima van los tres juntos. */
+@media (max-width: 30rem) {
+  .masthead-links a:first-child { flex-basis: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
