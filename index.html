@@ -31,13 +31,27 @@
 </head>
 <body>
 
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="square" stroke-linejoin="miter">
+    <rect x="2" y="5" width="20" height="14"/>
+    <path d="M2 6l10 7 10-7"/>
+  </symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M6.2 21H2.4V8.9h3.8V21zM4.3 7.2a2.2 2.2 0 1 1 0-4.4 2.2 2.2 0 0 1 0 4.4zM21.6 21h-3.8v-5.9c0-1.4 0-3.2-2-3.2s-2.3 1.5-2.3 3.1V21H9.7V8.9h3.6v1.7h.05c.5-1 1.7-2 3.6-2 3.9 0 4.6 2.5 4.6 5.8V21z"/>
+  </symbol>
+  <symbol id="i-github" viewBox="0 0 16 16" fill="currentColor">
+    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+  </symbol>
+</svg>
+
 <header class="masthead">
   <h1>Pedro Escobar Céspedes</h1>
   <p class="lede">Ingeniero backend senior. Node.js y TypeScript, Kubernetes y cloud, sistemas en producción.</p>
   <p class="masthead-links">
-    <a href="mailto:pedescoces@gmail.com">pedescoces@gmail.com</a>
-    <a href="https://www.linkedin.com/in/pedescoces/" rel="me">LinkedIn</a>
-    <a href="https://github.com/Therilion" rel="me">GitHub</a>
+    <a href="mailto:pedescoces@gmail.com"><svg aria-hidden="true"><use href="#i-mail"/></svg><span class="label">pedescoces@gmail.com</span></a>
+    <a href="https://www.linkedin.com/in/pedescoces/" rel="me"><svg aria-hidden="true"><use href="#i-linkedin"/></svg><span class="label">LinkedIn</span></a>
+    <a href="https://github.com/Therilion" rel="me"><svg aria-hidden="true"><use href="#i-github"/></svg><span class="label">GitHub</span></a>
   </p>
 </header>
 
@@ -217,8 +231,8 @@
   <h2 id="contact-title">Contacto</h2>
   <p class="email"><a href="mailto:pedescoces@gmail.com">pedescoces@gmail.com</a></p>
   <p class="contact-links">
-    <a href="https://www.linkedin.com/in/pedescoces/">LinkedIn</a>
-    <a href="https://github.com/Therilion">GitHub</a>
+    <a href="https://www.linkedin.com/in/pedescoces/"><svg aria-hidden="true"><use href="#i-linkedin"/></svg><span class="label">LinkedIn</span></a>
+    <a href="https://github.com/Therilion"><svg aria-hidden="true"><use href="#i-github"/></svg><span class="label">GitHub</span></a>
   </p>
 </footer>
 

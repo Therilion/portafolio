@@ -75,6 +75,10 @@ Requiere las tres tipografías instaladas localmente:
   tipográfico del sitio: Sans en el nombre, Serif en la bajada y Mono en el dominio. Las
   etiquetas `og:image` apuntan a una URL absoluta, porque el scraper que la lee no tiene
   la página como contexto.
+- **Íconos como sprite.** Los tres íconos de contacto viven en un `<svg>` oculto al inicio
+  del `body` y se referencian con `<use>`, así no se repite el marcado. Heredan
+  `currentColor`, de modo que toman solos el ámbar del hover. El subrayado del enlace va
+  en un `span` interno y no en el `<a>`, para que no cruce por debajo del ícono.
 - **Accesibilidad.** HTML semántico, `aria-label` en las secciones, foco visible y respeto
   por `prefers-reduced-motion`.
 

@@ -106,12 +106,44 @@ a:focus-visible {
 }
 
 .masthead-links a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
   margin-right: 1.7rem;
-  text-decoration-color: transparent;
 }
 
-.masthead-links a:hover { text-decoration-color: var(--accent); }
+.masthead-links a:hover .label { text-decoration-color: var(--accent); }
+
+/* ---------- Íconos de enlace ---------- */
+
+/* El sprite no se muestra; solo aporta los <symbol> que referencia <use> */
+.sprite { display: none; }
+
+/* El subrayado va en el texto, no en el enlace, para que no cruce el ícono */
+.masthead-links a,
+.contact-links a { text-decoration: none; }
+
+.masthead-links a .label,
+.contact-links a .label {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--rule-strong);
+}
+
+/* En el encabezado el subrayado solo aparece al pasar el cursor */
+.masthead-links a .label { text-decoration-color: transparent; }
+
+.contact-links a:hover .label { text-decoration-color: var(--accent); }
+
+.masthead-links svg,
+.contact-links svg {
+  width: 1.3em;
+  height: 1.3em;
+  flex: none;
+  /* Compensa el espaciado de letras, que se aplica también tras el ícono */
+  margin-right: -0.1em;
+}
 
 /* ---------- Retícula etiqueta / contenido ---------- */
 
@@ -239,7 +271,12 @@ main {
   text-transform: uppercase;
 }
 
-.contact-links a { margin-right: 1.7rem; }
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-right: 1.7rem;
+}
 
 /* ---------- Angosto ---------- */
 
