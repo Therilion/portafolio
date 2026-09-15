@@ -14,6 +14,8 @@ styles.css            Estilos
 favicon.svg           Ícono principal, fuente de los dos siguientes
 favicon.ico           Fallback multi-tamaño (16, 32 y 48 px)
 apple-touch-icon.png  180×180 para la pantalla de inicio en iOS
+og.svg                Fuente editable de la imagen anterior
+og.png                1200×630 para la previsualización al compartir el enlace
 ```
 
 No hay framework, bundler ni dependencias: HTML y CSS servidos tal cual. La única
@@ -41,6 +43,20 @@ Cloudflare Pages conectado al repositorio: cada push a `main` publica automátic
 Al no haber paso de build, Cloudflare sirve los archivos directamente desde la raíz del
 repositorio.
 
+### Regenerar `og.png`
+
+El `og.svg` se dibuja sobre un lienzo cuadrado de 1200×1200 y la tarjeta ocupa la banda
+central; `qlmanage` escala mal los SVG apaisados, así que se rasteriza cuadrado y se
+recorta después:
+
+```bash
+qlmanage -t -s 1200 -o . og.svg
+sips -c 630 1200 og.svg.png --out og.png && rm og.svg.png
+```
+
+Requiere las tipografías IBM Plex Sans y Mono instaladas localmente
+(`brew install --cask font-ibm-plex-sans font-ibm-plex-mono`).
+
 ## Decisiones de diseño
 
 - **Sin JavaScript.** El sitio es texto; no necesita nada más para cumplir su función.
@@ -55,6 +71,9 @@ repositorio.
   dibujadas como rectángulos, no como texto, para no depender de tipografías del sistema.
   Todas las coordenadas del `viewBox` de 32 son pares: así, al rasterizar a 16 px, cada
   unidad cae en un píxel entero y los trazos no se emborronan.
+- **Previsualización al compartir.** `og.png` reusa la paleta y el ícono, con el nombre en
+  Plex Sans 600 igual que el `h1`. Las etiquetas `og:image` apuntan a una URL absoluta,
+  porque el scraper que la lee no tiene la página como contexto.
 - **Accesibilidad.** HTML semántico, `aria-label` en las secciones, foco visible y respeto
   por `prefers-reduced-motion`.
 
