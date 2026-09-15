@@ -9,8 +9,11 @@ Publicado en **[pedescoces.cl](https://www.pedescoces.cl/)** mediante Cloudflare
 ## Estructura
 
 ```
-index.html    Contenido completo del sitio (una sola página)
-styles.css    Estilos
+index.html            Contenido completo del sitio (una sola página)
+styles.css            Estilos
+favicon.svg           Ícono principal, fuente de los dos siguientes
+favicon.ico           Fallback multi-tamaño (16, 32 y 48 px)
+apple-touch-icon.png  180×180 para la pantalla de inicio en iOS
 ```
 
 No hay framework, bundler ni dependencias: HTML y CSS servidos tal cual. La única
@@ -48,6 +51,10 @@ repositorio.
   los títulos y el stack van en sans, y los rótulos de sección en mono versalitas.
 - **Paleta oscura, sin alternativa clara.** Fondo tinta con una retícula tenue y un acento
   ámbar que marca los rótulos y el filete de cada sección. `color-scheme: dark` declarado.
+- **Ícono sobre grilla par.** El `favicon.svg` es una ventana de terminal con las iniciales
+  dibujadas como rectángulos, no como texto, para no depender de tipografías del sistema.
+  Todas las coordenadas del `viewBox` de 32 son pares: así, al rasterizar a 16 px, cada
+  unidad cae en un píxel entero y los trazos no se emborronan.
 - **Accesibilidad.** HTML semántico, `aria-label` en las secciones, foco visible y respeto
   por `prefers-reduced-motion`.
 
