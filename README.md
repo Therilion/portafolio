@@ -54,8 +54,8 @@ qlmanage -t -s 1200 -o . og.svg
 sips -c 630 1200 og.svg.png --out og.png && rm og.svg.png
 ```
 
-Requiere las tipografías IBM Plex Sans y Mono instaladas localmente
-(`brew install --cask font-ibm-plex-sans font-ibm-plex-mono`).
+Requiere las tres tipografías instaladas localmente:
+`brew install --cask font-ibm-plex-sans font-ibm-plex-serif font-ibm-plex-mono`.
 
 ## Decisiones de diseño
 
@@ -71,9 +71,10 @@ Requiere las tipografías IBM Plex Sans y Mono instaladas localmente
   dibujadas como rectángulos, no como texto, para no depender de tipografías del sistema.
   Todas las coordenadas del `viewBox` de 32 son pares: así, al rasterizar a 16 px, cada
   unidad cae en un píxel entero y los trazos no se emborronan.
-- **Previsualización al compartir.** `og.png` reusa la paleta y el ícono, con el nombre en
-  Plex Sans 600 igual que el `h1`. Las etiquetas `og:image` apuntan a una URL absoluta,
-  porque el scraper que la lee no tiene la página como contexto.
+- **Previsualización al compartir.** `og.png` reusa la paleta, el ícono y el mismo reparto
+  tipográfico del sitio: Sans en el nombre, Serif en la bajada y Mono en el dominio. Las
+  etiquetas `og:image` apuntan a una URL absoluta, porque el scraper que la lee no tiene
+  la página como contexto.
 - **Accesibilidad.** HTML semántico, `aria-label` en las secciones, foco visible y respeto
   por `prefers-reduced-motion`.
 

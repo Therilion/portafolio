@@ -37,7 +37,8 @@
     <text x="90" y="396" font-family="IBM Plex Sans" font-size="92" font-weight="600"
           letter-spacing="-2.9" fill="#f3f1e8">Céspedes</text>
 
-    <text x="90" y="472" font-family="IBM Plex Sans" font-size="36" font-weight="400"
+    <!-- Bajada en Serif, igual que el .lede del sitio -->
+    <text x="90" y="472" font-family="IBM Plex Serif" font-size="38" font-weight="400"
           fill="#9ba5a3">Ingeniero backend senior</text>
 
     <rect x="90" y="528" width="1020" height="2" fill="#263033"/>
