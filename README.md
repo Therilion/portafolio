@@ -4,7 +4,7 @@ Sitio personal de un ingeniero backend senior: tres casos de trabajo contados en
 (contexto, problema, decisión, alternativa descartada y resultado), el stack que uso y en
 qué estoy trabajando hoy.
 
-Publicado en **[pedescoces.cl](https://www.pedescoces.cl/)** mediante Cloudflare Pages.
+Publicado en **[pedescoces.cl](https://pedescoces.cl/)** mediante Cloudflare Pages.
 
 ## Estructura
 
