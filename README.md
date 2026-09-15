@@ -4,7 +4,7 @@ Sitio personal de un ingeniero backend senior: tres casos de trabajo contados en
 (contexto, problema, decisión, alternativa descartada y resultado), el stack que uso y en
 qué estoy trabajando hoy.
 
-Publicado en **[pedescoces.cl](https://pedescoces.cl/)** mediante Cloudflare Pages.
+Publicado en **[pedescoces.cl](https://pedescoces.cl/)** sobre Cloudflare Workers.
 
 ## Estructura
 
@@ -14,7 +14,7 @@ styles.css            Estilos
 favicon.svg           Ícono principal, fuente de los dos siguientes
 favicon.ico           Fallback multi-tamaño (16, 32 y 48 px)
 apple-touch-icon.png  180×180 para la pantalla de inicio en iOS
-og.svg                Fuente editable de la imagen anterior
+og.svg                Fuente editable de la tarjeta social
 og.png                1200×630 para la previsualización al compartir el enlace
 ```
 
@@ -32,16 +32,30 @@ python3 -m http.server 8000
 
 ## Despliegue
 
-Cloudflare Pages conectado al repositorio: cada push a `main` publica automáticamente.
+El sitio corre como un Worker de Cloudflare con assets estáticos, bajo **Workers & Pages**
+en el panel. El repositorio está conectado, así que cada push a `main` publica
+automáticamente. No hay paso de build: los archivos se sirven tal cual desde la raíz.
 
-| Opción | Valor |
-| --- | --- |
-| Framework preset | None |
-| Build command | *(vacío)* |
-| Build output directory | `/` |
+La configuración del despliegue vive en el panel de Cloudflare, no en este repositorio: no
+hay `wrangler.toml` ni script de Worker que versionar.
 
-Al no haber paso de build, Cloudflare sirve los archivos directamente desde la raíz del
-repositorio.
+### Dominios
+
+`pedescoces.cl` es la URL canónica, y así lo declaran el `<link rel="canonical">` y las
+etiquetas `og:` del HTML.
+
+`www.pedescoces.cl` redirige al apex con un **301** mediante una Redirect Rule
+(*Rules → Redirect Rules*), con patrón comodín `https://www.pedescoces.cl/*` hacia
+`https://pedescoces.cl/${1}`, preservando ruta y query string. Sin esa regla los dos
+hostnames servirían el mismo contenido, que es lo que había antes de configurarla.
+
+Para comprobar que sigue en pie:
+
+```bash
+curl -sI https://www.pedescoces.cl/ | grep -iE '^HTTP|^location'
+# HTTP/2 301
+# location: https://pedescoces.cl/
+```
 
 ### Regenerar `og.png`
 
