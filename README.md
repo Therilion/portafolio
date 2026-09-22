@@ -85,6 +85,11 @@ Requiere las tres tipografías instaladas localmente:
   compone más grande que el resto del resumen: es lo único que hay que recordar del caso.
 - **Cifras antes que párrafos.** Los números que estaban enterrados en la prosa (once años,
   tres meses de migración, un equipo de dos) suben a una banda al inicio.
+- **Diagramas en HTML, no en imagen.** Los tres de los casos —el antes y después de la
+  migración, el despacho de logs por lote y lo que el jugador espera dentro del request—
+  están hechos con CSS. Un SVG con texto dentro se escala con su `viewBox` y en un teléfono
+  deja las etiquetas en siete píxeles; así el texto reflows, se busca, se copia y se
+  imprime. Las dos barras del tercero están a la misma escala: la parte sólida es la espera.
 - **Tres áreas como índice.** Las tarjetas bajo las cifras nombran las áreas —arquitectura
   y migración, observabilidad, rendimiento— y son, a la vez, la única navegación del sitio:
   cada una ancla a su caso.
@@ -98,7 +103,8 @@ Requiere las tres tipografías instaladas localmente:
 - **Hoja de impresión.** En papel el sitio se vuelve documento: fondo blanco, tinta negra,
   sin la navegación por áreas, con los casos desplegados y con la URL impresa junto a cada
   enlace. Forzar el despliegue necesita dos reglas, `::details-content` para los
-  navegadores actuales y `display` sobre los hijos para los anteriores.
+  navegadores actuales y `display` sobre los hijos para los anteriores. Las tramas y los
+  rellenos de los diagramas llevan `print-color-adjust: exact` para no desaparecer en papel.
 - **Ícono sobre grilla par.** El `favicon.svg` es una ventana de terminal con las iniciales
   dibujadas como rectángulos, no como texto, para no depender de tipografías del sistema.
   Todas las coordenadas del `viewBox` de 32 son pares: así, al rasterizar a 16 px, cada

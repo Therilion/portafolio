@@ -124,6 +124,36 @@
         </div>
       </div>
 
+      <figure class="viz">
+        <div class="shift">
+          <div class="shift-side">
+            <p class="shift-when">Antes</p>
+            <p class="shift-what">PlayFab CloudScript</p>
+            <ul class="shift-list">
+              <li>Una función suelta por endpoint</li>
+              <li>Sin librerías externas ni asincronía</li>
+              <li>Límite duro de tiempo por función</li>
+              <li class="gone">Descontinuado por el proveedor</li>
+            </ul>
+          </div>
+          <p class="shift-arrow">
+            <svg aria-hidden="true"><use href="#i-chevron"/></svg>
+            <span>capa de adaptadores</span>
+          </p>
+          <div class="shift-side">
+            <p class="shift-when">Después</p>
+            <p class="shift-what">Monolito sobre Kubernetes</p>
+            <ul class="shift-list">
+              <li>Un servicio contenerizado en AKS</li>
+              <li>Despliegue automatizado por CI/CD</li>
+              <li>Control explícito del escalamiento</li>
+              <li>RabbitMQ dentro del cluster</li>
+            </ul>
+          </div>
+        </div>
+        <figcaption>Los adaptadores traducían las llamadas que el cliente de juego ya hacía, así que el servicio se levantó entero primero y se reordenó por dentro después.</figcaption>
+      </figure>
+
       <ul class="chips" aria-label="Habilidades aplicadas en este caso">
         <li>TypeScript</li>
         <li>Node.js</li>
@@ -196,6 +226,28 @@
           <div class="row-body"><p>De cinco minutos de espera a segundos para poder buscar. Un incidente de partidas que no se registraban se resolvió leyendo un log, en vez de reproducir el error.</p></div>
         </div>
       </div>
+
+      <figure class="viz">
+        <p class="batch-head">Un request deja entre 10 y 30 registros del backend, y sobre 100 sumando los que sube el cliente de juego.</p>
+        <div class="batch-row">
+          <span class="batch-when">Antes</span>
+          <span class="batch-pipe">
+            <span class="batch-logs" aria-hidden="true"></span>
+            <svg class="batch-arrow" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </span>
+          <span class="batch-out"><span class="batch-n">10–30</span>llamadas HTTP por request</span>
+        </div>
+        <div class="batch-row">
+          <span class="batch-when">Después</span>
+          <span class="batch-pipe">
+            <span class="batch-logs" aria-hidden="true"></span>
+            <span class="batch-buffer">buffer</span>
+            <svg class="batch-arrow" aria-hidden="true"><use href="#i-chevron"/></svg>
+          </span>
+          <span class="batch-out"><span class="batch-n">1</span>envío por lote</span>
+        </div>
+        <figcaption>El buffer convierte un costo por registro en un costo por lote. Despacha al llenarse o tras unos segundos sin registros nuevos, y devuelve los mensajes a la cola si el envío falla.</figcaption>
+      </figure>
 
       <ul class="chips" aria-label="Habilidades aplicadas en este caso">
         <li>TypeScript</li>
@@ -270,6 +322,30 @@
           <div class="row-body"><p>Las partidas bajaron de unos 20 segundos a 2. Los premios, de agotar el límite de ejecución a entre 2 y 5 segundos. En pruebas de carga el backend sostuvo 1.000 usuarios concurrentes.</p></div>
         </div>
       </div>
+
+      <figure class="viz">
+        <p class="bars-title">Finalizar una partida</p>
+        <div class="bar-row">
+          <span class="bar-when">Antes</span>
+          <span class="bar" aria-hidden="true">
+            <span class="seg seg-wait seg-full"></span>
+          </span>
+          <span class="bar-time">~20 s</span>
+        </div>
+        <div class="bar-row">
+          <span class="bar-when">Después</span>
+          <span class="bar" aria-hidden="true">
+            <span class="seg seg-wait"></span>
+            <span class="seg seg-defer"></span>
+          </span>
+          <span class="bar-time">~2 s</span>
+        </div>
+        <p class="bar-legend">
+          <span class="key key-wait">el jugador espera</span>
+          <span class="key key-defer">se resuelve después de responder</span>
+        </p>
+        <figcaption>El corte está en lo que el jugador necesita para seguir jugando: ve el resultado apenas se resuelve, y la persistencia ocurre por detrás. La entrega de premios siguió el mismo criterio y pasó de agotar el límite de ejecución a responder entre 2 y 5 segundos.</figcaption>
+      </figure>
 
       <ul class="chips" aria-label="Habilidades aplicadas en este caso">
         <li>TypeScript</li>

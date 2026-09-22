@@ -297,6 +297,7 @@ main {
 
 .case-meta,
 .case-plain,
+.viz,
 .chips,
 .detail > summary { margin-left: calc(var(--gutter) + var(--gap)); }
 
@@ -499,6 +500,264 @@ main {
   margin-right: 1.7rem;
 }
 
+/* ---------- Figuras ---------- */
+
+/* Los tres diagramas son HTML y CSS, no imágenes: el texto reflows en pantallas
+   angostas, se busca con ⌘F, se copia y se imprime con el resto del documento */
+.viz {
+  max-width: var(--measure);
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 2.4rem;
+  padding: 1.5rem 1.5rem 1.35rem;
+  border: 1px solid var(--rule);
+  border-top: 2px solid var(--accent-dim);
+}
+
+.viz figcaption {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.81rem;
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* Rótulo común de las tres figuras: la columna que dice antes o después */
+.shift-when,
+.batch-when,
+.bar-when {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---------- Figura: antes y después de la migración ---------- */
+
+.shift {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.shift-side { min-width: 0; }
+
+.shift-when { margin: 0 0 0.5rem; }
+
+.shift-what {
+  margin: 0 0 0.75rem;
+  font-family: var(--sans);
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #f3f1e8;
+}
+
+.shift-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--sans);
+  font-size: 0.79rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.shift-list li {
+  position: relative;
+  margin-bottom: 0.4rem;
+  padding-left: 0.85rem;
+}
+
+.shift-list li:last-child { margin-bottom: 0; }
+
+.shift-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.68em;
+  left: 0;
+  width: 5px;
+  height: 1px;
+  background: var(--rule-strong);
+}
+
+/* Lo que se cayó del lado antiguo y motivó la migración */
+.shift-list .gone {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+}
+
+.shift-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.shift-arrow svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--accent);
+}
+
+.shift-arrow span {
+  max-width: 5.5rem;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ---------- Figura: los logs por lote ---------- */
+
+.batch-head {
+  margin: 0 0 1.25rem;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.batch-row {
+  display: grid;
+  grid-template-columns: 4.6rem minmax(0, 1fr) max-content;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.batch-row:last-of-type { margin-bottom: 0; }
+
+.batch-pipe {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+/* Cada trazo es un registro; no hay marcado por log, los dibuja el degradado */
+.batch-logs {
+  flex: 1;
+  min-width: 0;
+  height: 0.7rem;
+  background-image: repeating-linear-gradient(to right, var(--accent-dim) 0 3px, transparent 3px 8px);
+  print-color-adjust: exact;
+}
+
+.batch-buffer {
+  flex: none;
+  padding: 0.2rem 0.45rem;
+  border: 1px solid var(--rule-strong);
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.batch-arrow {
+  flex: none;
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--rule-strong);
+}
+
+.batch-out {
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  line-height: 1.35;
+  text-align: right;
+  color: var(--muted);
+}
+
+.batch-n {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #f3f1e8;
+}
+
+/* ---------- Figura: qué espera el jugador ---------- */
+
+.bars-title {
+  margin: 0 0 1rem;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #f3f1e8;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 4.6rem minmax(0, 1fr) 3.4rem;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.55rem;
+}
+
+.bar {
+  display: flex;
+  height: 1.15rem;
+  min-width: 0;
+}
+
+/* Las dos barras están a la misma escala: los veinte segundos de antes ocupan
+   el ancho completo, y los dos de después, la décima parte */
+.seg-wait {
+  flex: 1;
+  background: var(--accent);
+  print-color-adjust: exact;
+}
+
+.seg-full { flex: 10; }
+
+.seg-defer {
+  flex: 9;
+  border: 1px dashed var(--rule-strong);
+  border-left: 0;
+}
+
+.bar-time {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  text-align: right;
+  color: var(--ink);
+}
+
+.bar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.2rem;
+  margin: 1.1rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.key { display: inline-flex; align-items: center; gap: 0.45rem; }
+
+.key::before {
+  content: "";
+  width: 0.85rem;
+  height: 0.7rem;
+  flex: none;
+  print-color-adjust: exact;
+}
+
+.key-wait::before { background: var(--accent); }
+.key-defer::before { border: 1px dashed var(--rule-strong); }
+
 /* ---------- Angosto ---------- */
 
 @media (max-width: 46rem) {
@@ -559,6 +818,7 @@ main {
   .contact h2,
   .case-meta,
   .case-plain,
+  .viz,
   .chips,
   .detail > summary,
   .now .prose,
@@ -575,6 +835,20 @@ main {
   .case h2::before { top: 0.52em; left: 0; }
 
   .case-plain { margin-bottom: 2rem; }
+
+  .viz { padding: 1.25rem 1.15rem 1.1rem; }
+
+  /* Sin dos columnas, el antes y el después se apilan y la flecha gira */
+  .shift { grid-template-columns: minmax(0, 1fr); gap: 1.35rem; }
+  .shift-arrow { flex-direction: row; gap: 0.7rem; }
+  .shift-arrow svg { transform: rotate(90deg); }
+  .shift-arrow span { max-width: none; text-align: left; }
+
+  .batch-row,
+  .bar-row { grid-template-columns: 3.9rem minmax(0, 1fr) max-content; gap: 0.6rem; }
+
+  .batch-out { font-size: 0.72rem; }
+  .batch-buffer { padding: 0.2rem 0.35rem; }
 
   .brief .row { margin-bottom: 1.35rem; }
 
@@ -652,5 +926,10 @@ main {
   }
 
   h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
-  .figure, .brief, .chips { break-inside: avoid; page-break-inside: avoid; }
+  .figure, .brief, .chips, .viz { break-inside: avoid; page-break-inside: avoid; }
+
+  /* Los diagramas se imprimen: las tramas y los rellenos llevan
+     print-color-adjust, y las variables ya viraron a tinta sobre blanco */
+  .viz { border-color: var(--rule); }
+  .shift-arrow svg { color: var(--accent); }
 }
