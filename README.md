@@ -9,17 +9,20 @@ Publicado en **[pedescoces.cl](https://pedescoces.cl/)** sobre Cloudflare Worker
 ## Estructura
 
 ```
-index.html            Contenido completo del sitio (una sola página)
-styles.css            Estilos
-favicon.svg           Ícono principal, fuente de los dos siguientes
-favicon.ico           Fallback multi-tamaño (16, 32 y 48 px)
-apple-touch-icon.png  180×180 para la pantalla de inicio en iOS
-og.svg                Fuente editable de la tarjeta social
-og.png                1200×630 para la previsualización al compartir el enlace
+index.html                   Contenido completo del sitio (una sola página)
+styles.css                   Estilos
+assets/favicon.svg           Ícono principal, fuente de los dos siguientes
+assets/favicon.ico           Fallback multi-tamaño (16, 32 y 48 px)
+assets/apple-touch-icon.png  180×180 para la pantalla de inicio en iOS
+assets/og.svg                Fuente editable de la tarjeta social
+assets/og.png                1200×630 para la previsualización al compartir el enlace
 ```
 
 No hay framework, bundler ni dependencias: HTML y CSS servidos tal cual. La única
 dependencia externa es la tipografía IBM Plex (Sans, Serif y Mono) desde Google Fonts.
+
+Los íconos y la tarjeta social viven en `assets/`. Como las rutas se declaran una por una
+en el `<head>`, ningún navegador depende de encontrarlos en la raíz.
 
 ## Desarrollo local
 
@@ -64,8 +67,8 @@ central; `qlmanage` escala mal los SVG apaisados, así que se rasteriza cuadrado
 recorta después:
 
 ```bash
-qlmanage -t -s 1200 -o . og.svg
-sips -c 630 1200 og.svg.png --out og.png && rm og.svg.png
+qlmanage -t -s 1200 -o assets assets/og.svg
+sips -c 630 1200 assets/og.svg.png --out assets/og.png && rm assets/og.svg.png
 ```
 
 Requiere las tres tipografías instaladas localmente:
