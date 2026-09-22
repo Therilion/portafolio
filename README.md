@@ -90,6 +90,9 @@ Requiere las tres tipografías instaladas localmente:
   están hechos con CSS. Un SVG con texto dentro se escala con su `viewBox` y en un teléfono
   deja las etiquetas en siete píxeles; así el texto reflows, se busca, se copia y se
   imprime. Las dos barras del tercero están a la misma escala: la parte sólida es la espera.
+- **Trayectoria como riel.** La sección reusa la retícula de etiqueta y contenido —las
+  fechas caen en la columna de los rótulos— y le agrega un riel con un punto por parada.
+  El punto de los estudios va hueco, porque no es un trabajo.
 - **Tres áreas como índice.** Las tarjetas bajo las cifras nombran las áreas —arquitectura
   y migración, observabilidad, rendimiento— y son, a la vez, la única navegación del sitio:
   cada una ancla a su caso.

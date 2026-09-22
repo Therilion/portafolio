@@ -285,6 +285,7 @@ main {
 
 .case,
 .stack,
+.path,
 .now,
 .contact {
   padding: 4.25rem 0;
@@ -439,6 +440,7 @@ main {
 /* ---------- Stack y En qué estoy ---------- */
 
 .stack h2,
+.path h2,
 .now h2,
 .contact h2 {
   margin: 0 0 2.4rem;
@@ -758,6 +760,81 @@ main {
 .key-wait::before { background: var(--accent); }
 .key-defer::before { border: 1px dashed var(--rule-strong); }
 
+/* ---------- Trayectoria ---------- */
+
+.track { position: relative; }
+
+/* El riel corre por la mitad del canalón, entre las fechas y lo que pasó */
+.track::before {
+  content: "";
+  position: absolute;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  left: calc(var(--gutter) + var(--gap) / 2);
+  width: 1px;
+  background: var(--rule);
+  print-color-adjust: exact;
+}
+
+.stop {
+  position: relative;
+  margin-bottom: 2.1rem;
+}
+
+/* El punto se alinea con la primera línea de la fecha, no con el borde
+   de la fila: de ahí el desplazamiento de medio cuadratín */
+.stop::before {
+  content: "";
+  position: absolute;
+  top: 0.78rem;
+  left: calc(var(--gutter) + var(--gap) / 2 - 3px);
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  print-color-adjust: exact;
+}
+
+/* Los estudios no son un trabajo: el punto va hueco */
+.stop-study::before {
+  background: var(--ground);
+  border: 1px solid var(--accent-dim);
+}
+
+.stop .row-label {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.stop-where {
+  margin: 0 0 0.3rem;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #f3f1e8;
+}
+
+.stop-before {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stop-what {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
 /* ---------- Angosto ---------- */
 
 @media (max-width: 46rem) {
@@ -803,6 +880,7 @@ main {
 
   .case,
   .stack,
+  .path,
   .now,
   .contact {
     padding-top: 3rem;
@@ -814,6 +892,7 @@ main {
 
   .case h2,
   .stack h2,
+  .path h2,
   .now h2,
   .contact h2,
   .case-meta,
@@ -852,7 +931,12 @@ main {
 
   .brief .row { margin-bottom: 1.35rem; }
 
-  .stack h2, .now h2, .contact h2 { margin-bottom: 1.6rem; }
+  .stack h2, .path h2, .now h2, .contact h2 { margin-bottom: 1.6rem; }
+
+  /* Sin canalón, el riel se pega al borde y la entrada sangra para dejarle sitio */
+  .track::before { left: 3px; }
+  .stop { padding-left: 1.15rem; margin-bottom: 1.75rem; }
+  .stop::before { top: 0.35rem; left: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -901,6 +985,7 @@ main {
   .figures-band,
   .case,
   .stack,
+  .path,
   .now,
   .contact {
     padding: 1.5rem 0;
@@ -926,7 +1011,7 @@ main {
   }
 
   h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
-  .figure, .brief, .chips, .viz { break-inside: avoid; page-break-inside: avoid; }
+  .figure, .brief, .chips, .viz, .stop { break-inside: avoid; page-break-inside: avoid; }
 
   /* Los diagramas se imprimen: las tramas y los rellenos llevan
      print-color-adjust, y las variables ya viraron a tinta sobre blanco */
