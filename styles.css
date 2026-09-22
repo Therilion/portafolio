@@ -92,6 +92,17 @@ a:focus-visible {
   color: var(--muted);
 }
 
+/* La misma presentación, sin una sola palabra técnica: es la que tiene que
+   funcionar para quien hace el primer filtro y no programa */
+.plain {
+  max-width: var(--measure);
+  margin: 1.35rem 0 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
 .masthead-links {
   order: -1;
   margin: 0;
@@ -171,6 +182,100 @@ a:focus-visible {
 
 .row-body { min-width: 0; }
 
+/* ---------- Cifras ---------- */
+
+.figures-band {
+  padding: 3.25rem 0 3.5rem;
+  border-top: 1px solid var(--rule);
+  background-image: linear-gradient(to right, var(--accent) 0 100%);
+  background-repeat: no-repeat;
+  background-size: var(--gutter) 2px;
+  background-position: 0 -1px;
+}
+
+.figures {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.75rem 2rem;
+  margin: 0;
+}
+
+.figure {
+  border-top: 2px solid var(--accent-dim);
+  padding-top: 0.85rem;
+}
+
+.figures dt {
+  font-family: var(--sans);
+  font-size: clamp(1.3rem, 3.4vw, 1.7rem);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 1.05;
+  color: #f3f1e8;
+}
+
+.figures dd {
+  margin: 0.55rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* ---------- Áreas ---------- */
+
+.areas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding-bottom: 4.25rem;
+}
+
+.area {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.3rem 1.45rem;
+  border: 1px solid var(--rule);
+  border-top: 2px solid var(--accent-dim);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.area:hover {
+  border-color: var(--rule-strong);
+  border-top-color: var(--accent);
+  background-color: rgba(255, 255, 255, 0.02);
+  color: inherit;
+}
+
+.area:hover .area-name { color: var(--accent); }
+
+.area-num {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.area-name {
+  margin-top: 0.7rem;
+  font-family: var(--sans);
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #f3f1e8;
+}
+
+.area-note {
+  margin-top: 0.6rem;
+  font-family: var(--sans);
+  font-size: 0.83rem;
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
 /* ---------- Casos ---------- */
 
 main {
@@ -190,9 +295,30 @@ main {
   background-position: 0 -1px;
 }
 
+.case-meta,
+.case-plain,
+.chips,
+.detail > summary { margin-left: calc(var(--gutter) + var(--gap)); }
+
+.case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.case-num { color: var(--accent); }
+.case-area { color: var(--muted); }
+.case-area::before { content: "· "; }
+
 .case h2 {
   position: relative;
-  margin: 0 0 2.6rem;
+  margin: 0 0 1.1rem;
   margin-left: calc(var(--gutter) + var(--gap));
   max-width: var(--measure);
   font-family: var(--sans);
@@ -213,6 +339,101 @@ main {
   height: 7px;
   background: var(--accent);
 }
+
+/* El título en una línea, para quien no conoce ninguna de las herramientas */
+.case-plain {
+  max-width: var(--measure);
+  margin-top: 0;
+  margin-bottom: 2.4rem;
+  font-size: 1.12rem;
+  line-height: 1.55;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* ---------- Resumen del caso ---------- */
+
+.brief { margin-bottom: 2.4rem; }
+
+.brief .row { margin-bottom: 1.5rem; }
+
+.brief .row-body {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* La decisión es lo que se recuerda del caso: se lee antes que el resto */
+.brief .row-body.key {
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #f3f1e8;
+}
+
+/* ---------- Habilidades aplicadas ---------- */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: var(--measure);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chips li {
+  padding: 0.3rem 0.62rem;
+  border: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* ---------- Detalle plegado ---------- */
+
+.detail { margin-top: 2.4rem; }
+
+.detail > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  max-width: var(--measure);
+  padding: 0.8rem 0;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  cursor: pointer;
+  list-style: none;
+}
+
+/* Sin el triángulo del navegador: el galón del sprite lo reemplaza */
+.detail > summary::-webkit-details-marker { display: none; }
+
+.detail > summary:hover { color: #f3f1e8; }
+
+.detail > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.chev {
+  width: 0.95em;
+  height: 0.95em;
+  flex: none;
+  transition: transform 0.15s ease;
+}
+
+.detail[open] > summary .chev { transform: rotate(90deg); }
+
+.detail[open] > summary { margin-bottom: 2.5rem; }
 
 /* ---------- Stack y En qué estoy ---------- */
 
@@ -308,6 +529,19 @@ main {
     padding-top: 0;
   }
 
+  .figures-band {
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
+    background-size: 7rem 2px;
+  }
+
+  .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .areas {
+    grid-template-columns: minmax(0, 1fr);
+    padding-bottom: 3rem;
+  }
+
   .case,
   .stack,
   .now,
@@ -323,6 +557,10 @@ main {
   .stack h2,
   .now h2,
   .contact h2,
+  .case-meta,
+  .case-plain,
+  .chips,
+  .detail > summary,
   .now .prose,
   .email,
   .contact-links { margin-left: 0; }
@@ -330,22 +568,89 @@ main {
   /* Sin canalón, el marcador se alinea a la izquierda de la primera línea
      y el título sangra para dejarle sitio */
   .case h2 {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     padding-left: 1.15rem;
   }
 
   .case h2::before { top: 0.52em; left: 0; }
 
-  .stack h2, .now h2, .contact h2 { margin-bottom: 1.6rem; }
-}
+  .case-plain { margin-bottom: 2rem; }
 
-/* Bajo 480px los tres enlaces no caben en una línea, o caben pegados al borde:
-   medido, el quiebre está en 400px de contenido. El correo pasa a ocupar la suya
-   y los otros dos comparten la siguiente. Por encima van los tres juntos. */
-@media (max-width: 30rem) {
-  .masthead-links a:first-child { flex-basis: 100%; }
+  .brief .row { margin-bottom: 1.35rem; }
+
+  .stack h2, .now h2, .contact h2 { margin-bottom: 1.6rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
+}
+
+/* ---------- Impresión ---------- */
+
+/* Muchos reclutadores guardan la página en PDF antes de pasarla al equipo:
+   en papel se imprime como un documento, no como una captura del sitio */
+@media print {
+  :root {
+    --ground: #fff;
+    --ink: #16191b;
+    --muted: #454d50;
+    --rule: #c8ccce;
+    --rule-strong: #9aa1a4;
+    --accent: #7a5717;
+    --accent-dim: #b39150;
+    --gutter: 8rem;
+    --gap: 1.5rem;
+    --measure: 42rem;
+  }
+
+  html {
+    color-scheme: light;
+    background: #fff;
+  }
+
+  body {
+    padding: 0;
+    background: #fff;
+    background-image: none;
+    color: var(--ink);
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+
+  .masthead { padding: 0 0 1.5rem; }
+  .masthead h1 { margin-top: 0; color: #000; }
+  .case h2, .figures dt, .brief .row-body.key { color: #000; }
+
+  /* Las tarjetas de área son navegación: en papel no llevan a ninguna parte */
+  .areas { display: none; }
+
+  .figures-band,
+  .case,
+  .stack,
+  .now,
+  .contact {
+    padding: 1.5rem 0;
+    background-image: none;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* En papel no hay nada que plegar. La primera regla cubre los navegadores
+     que ocultan el contenido con ::details-content; la segunda, los que
+     todavía lo hacen con display en los hijos */
+  .detail > summary { display: none; }
+  .detail::details-content { content-visibility: visible !important; block-size: auto !important; }
+  .detail:not([open]) > *:not(summary) { display: block; }
+
+  /* El enlace impreso no se puede pulsar: la URL va al lado */
+  main a[href^="http"]::after,
+  .contact-links a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-family: var(--mono);
+    font-size: 0.78em;
+    color: var(--muted);
+    word-break: break-all;
+  }
+
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+  .figure, .brief, .chips { break-inside: avoid; page-break-inside: avoid; }
 }

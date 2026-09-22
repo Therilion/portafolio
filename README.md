@@ -1,8 +1,8 @@
 # Portafolio — Pedro Escobar Céspedes
 
-Sitio personal de un ingeniero backend senior: tres casos de trabajo contados en detalle
-(contexto, problema, decisión, alternativa descartada y resultado), el stack que uso y en
-qué estoy trabajando hoy.
+Sitio personal de un ingeniero backend senior: tres casos de trabajo contados en dos
+niveles —un resumen de problema, decisión y resultado, y el caso completo detrás de un
+desplegable—, el stack que uso y en qué estoy trabajando hoy.
 
 Publicado en **[pedescoces.cl](https://pedescoces.cl/)** sobre Cloudflare Workers.
 
@@ -76,7 +76,18 @@ Requiere las tres tipografías instaladas localmente:
 
 ## Decisiones de diseño
 
-- **Sin JavaScript.** El sitio es texto; no necesita nada más para cumplir su función.
+- **Sin JavaScript.** El sitio es texto; no necesita nada más para cumplir su función. El
+  plegado de cada caso usa `<details>` y `<summary>` nativos, así que el contenido está
+  siempre en el HTML: se indexa, se busca con ⌘F y se imprime aunque esté cerrado.
+- **Dos niveles de lectura.** Quien revisa cien portafolios no lee tres mil palabras. Cada
+  caso abre con un titular en lenguaje llano y un resumen de tres líneas —problema,
+  decisión, resultado— y guarda el relato completo tras *El caso completo*. La decisión se
+  compone más grande que el resto del resumen: es lo único que hay que recordar del caso.
+- **Cifras antes que párrafos.** Los números que estaban enterrados en la prosa (once años,
+  tres meses de migración, un equipo de dos) suben a una banda al inicio.
+- **Tres áreas como índice.** Las tarjetas bajo las cifras nombran las áreas —arquitectura
+  y migración, observabilidad, rendimiento— y son, a la vez, la única navegación del sitio:
+  cada una ancla a su caso.
 - **Retícula de etiqueta y contenido.** Cada bloque lleva su rótulo (`Contexto`,
   `El problema`, `Qué decidí`…) en una columna lateral que colapsa sobre el contenido en
   pantallas angostas.
@@ -84,6 +95,10 @@ Requiere las tres tipografías instaladas localmente:
   los títulos y el stack van en sans, y los rótulos de sección en mono versalitas.
 - **Paleta oscura, sin alternativa clara.** Fondo tinta con una retícula tenue y un acento
   ámbar que marca los rótulos y el filete de cada sección. `color-scheme: dark` declarado.
+- **Hoja de impresión.** En papel el sitio se vuelve documento: fondo blanco, tinta negra,
+  sin la navegación por áreas, con los casos desplegados y con la URL impresa junto a cada
+  enlace. Forzar el despliegue necesita dos reglas, `::details-content` para los
+  navegadores actuales y `display` sobre los hijos para los anteriores.
 - **Ícono sobre grilla par.** El `favicon.svg` es una ventana de terminal con las iniciales
   dibujadas como rectángulos, no como texto, para no depender de tipografías del sistema.
   Todas las coordenadas del `viewBox` de 32 son pares: así, al rasterizar a 16 px, cada
@@ -92,10 +107,11 @@ Requiere las tres tipografías instaladas localmente:
   tipográfico del sitio: Sans en el nombre, Serif en la bajada y Mono en el dominio. Las
   etiquetas `og:image` apuntan a una URL absoluta, porque el scraper que la lee no tiene
   la página como contexto.
-- **Íconos como sprite.** Los tres íconos de contacto viven en un `<svg>` oculto al inicio
-  del `body` y se referencian con `<use>`, así no se repite el marcado. Heredan
-  `currentColor`, de modo que toman solos el ámbar del hover. El subrayado del enlace va
-  en un `span` interno y no en el `<a>`, para que no cruce por debajo del ícono.
+- **Íconos como sprite.** Los cuatro íconos —correo, LinkedIn, GitHub y el galón de los
+  desplegables— viven en un `<svg>` oculto al inicio del `body` y se referencian con
+  `<use>`, así no se repite el marcado. Heredan `currentColor`, de modo que toman solos el
+  ámbar del hover. El subrayado del enlace va en un `span` interno y no en el `<a>`, para
+  que no cruce por debajo del ícono.
 - **Accesibilidad.** HTML semántico, `aria-label` en las secciones, foco visible y respeto
   por `prefers-reduced-motion`.
 
