@@ -16,6 +16,8 @@ assets/favicon.ico           Fallback multi-tamaño (16, 32 y 48 px)
 assets/apple-touch-icon.png  180×180 para la pantalla de inicio en iOS
 assets/og.svg                Fuente editable de la tarjeta social
 assets/og.png                1200×630 para la previsualización al compartir el enlace
+assets/linkedin-banner.svg   Fuente editable del banner de LinkedIn
+assets/linkedin-banner.png   1584×396 para la portada del perfil de LinkedIn
 ```
 
 No hay framework, bundler ni dependencias: HTML y CSS servidos tal cual. La única
@@ -73,6 +75,28 @@ sips -c 630 1200 assets/og.svg.png --out assets/og.png && rm assets/og.svg.png
 
 Requiere las tres tipografías instaladas localmente:
 `brew install --cask font-ibm-plex-sans font-ibm-plex-serif font-ibm-plex-mono`.
+
+### Regenerar `linkedin-banner.png`
+
+Mismo procedimiento y misma razón: el banner es aún más apaisado que la tarjeta social
+(1584×396), así que se dibuja centrado en un lienzo de 1584×1584 y se recorta después.
+
+```bash
+qlmanage -t -s 1584 -o assets assets/linkedin-banner.svg
+sips -c 396 1584 assets/linkedin-banner.svg.png --out assets/linkedin-banner.png \
+  && rm assets/linkedin-banner.svg.png
+```
+
+El banner no lo usa el sitio: vive acá para poder regenerarlo con la misma paleta cuando
+cambie el texto. Es la ventana de terminal del `favicon` a escala grande —marco ámbar,
+interior tinta y barra de título maciza— con un `curl` al sitio y su respuesta.
+
+La ventana ocupa la mitad central del lienzo por dos razones: la foto de perfil de LinkedIn
+tapa la esquina inferior izquierda, que así queda deliberadamente vacía, y el recorte que
+LinkedIn aplica en pantallas angostas nunca llega a morderla.
+
+El texto se posiciona por columnas calculadas, no por espacios en blanco: SVG los colapsa,
+y la alineación de las claves del JSON depende de que cada carácter caiga en su columna.
 
 ## Decisiones de diseño
 

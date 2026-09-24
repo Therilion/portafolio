@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 1584">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="0%" r="95%">
+      <stop offset="0%" stop-color="#1b2429"/>
+      <stop offset="62%" stop-color="#0f1416"/>
+    </radialGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0V44M0 44H44" stroke="#e0a13a" stroke-opacity="0.07" stroke-width="1" fill="none"/>
+    </pattern>
+  </defs>
+
+  <rect width="1584" height="1584" fill="#0f1416"/>
+
+  <!-- La banda 594..990 es la que se recorta como 1584x396 -->
+  <g transform="translate(0,594)">
+    <rect width="1584" height="396" fill="url(#glow)"/>
+    <rect width="1584" height="396" fill="url(#grid)"/>
+
+    <!-- Ventana de terminal: la misma geometría del favicon a escala grande,
+         marco ámbar, interior tinta y barra de título maciza -->
+    <g shape-rendering="crispEdges">
+      <rect x="382" y="34" width="820" height="328" fill="#e0a13a"/>
+      <rect x="386" y="38" width="812" height="320" fill="#0f1416"/>
+      <rect x="386" y="38" width="812" height="18" fill="#e0a13a"/>
+    </g>
+
+      <text x="425.0" y="113" font-family="IBM Plex Mono" font-size="24" fill="#e0a13a">$</text>
+      <text x="453.8" y="113" font-family="IBM Plex Mono" font-size="24" fill="#f3f1e8">curl -s</text>
+      <text x="569.0" y="113" font-family="IBM Plex Mono" font-size="24" fill="#e0a13a">pedescoces.cl/perfil.json</text>
+      <text x="425.0" y="146" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">{</text>
+      <text x="453.8" y="179" font-family="IBM Plex Mono" font-size="24" fill="#9ba5a3">&quot;rol&quot;:</text>
+      <text x="583.4" y="179" font-family="IBM Plex Mono" font-size="24" fill="#f3f1e8">&quot;Ingeniero backend senior&quot;</text>
+      <text x="957.8" y="179" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">,</text>
+      <text x="453.8" y="212" font-family="IBM Plex Mono" font-size="24" fill="#9ba5a3">&quot;stack&quot;:</text>
+      <text x="583.4" y="212" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">[</text>
+      <text x="597.8" y="212" font-family="IBM Plex Mono" font-size="24" fill="#f3f1e8">&quot;Node.js&quot;</text>
+      <text x="727.4" y="212" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">,</text>
+      <text x="756.2" y="212" font-family="IBM Plex Mono" font-size="24" fill="#f3f1e8">&quot;TypeScript&quot;</text>
+      <text x="929.0" y="212" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">,</text>
+      <text x="957.8" y="212" font-family="IBM Plex Mono" font-size="24" fill="#f3f1e8">&quot;Kubernetes&quot;</text>
+      <text x="1130.6" y="212" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">]</text>
+      <text x="1145.0" y="212" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">,</text>
+      <text x="453.8" y="245" font-family="IBM Plex Mono" font-size="24" fill="#9ba5a3">&quot;cloud&quot;:</text>
+      <text x="583.4" y="245" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">[</text>
+      <text x="597.8" y="245" font-family="IBM Plex Mono" font-size="24" fill="#f3f1e8">&quot;Azure&quot;</text>
+      <text x="698.6" y="245" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">,</text>
+      <text x="727.4" y="245" font-family="IBM Plex Mono" font-size="24" fill="#f3f1e8">&quot;AWS&quot;</text>
+      <text x="799.4" y="245" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">]</text>
+      <text x="813.8" y="245" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">,</text>
+      <text x="453.8" y="278" font-family="IBM Plex Mono" font-size="24" fill="#9ba5a3">&quot;modo&quot;:</text>
+      <text x="583.4" y="278" font-family="IBM Plex Mono" font-size="24" fill="#f3f1e8">&quot;Remoto desde Chile&quot;</text>
+      <text x="425.0" y="311" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">}</text>
+
+    <rect x="453.8" y="293" width="13" height="23" fill="#e0a13a" opacity="0.9"/>
+  </g>
+</svg>
