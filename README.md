@@ -11,6 +11,7 @@ Publicado en **[pedescoces.cl](https://pedescoces.cl/)** sobre Cloudflare Worker
 ```
 index.html                   Contenido completo del sitio (una sola página)
 styles.css                   Estilos
+perfil.json                  El perfil como JSON, para el curl del banner de LinkedIn
 assets/favicon.svg           Ícono principal, fuente de los dos siguientes
 assets/favicon.ico           Fallback multi-tamaño (16, 32 y 48 px)
 assets/apple-touch-icon.png  180×180 para la pantalla de inicio en iOS
@@ -97,6 +98,19 @@ LinkedIn aplica en pantallas angostas nunca llega a morderla.
 
 El texto se posiciona por columnas calculadas, no por espacios en blanco: SVG los colapsa,
 y la alineación de las claves del JSON depende de que cada carácter caiga en su columna.
+
+### `perfil.json`
+
+El banner muestra `curl -s pedescoces.cl/perfil.json`, así que el archivo existe y el
+comando funciona de verdad: quien se tome la molestia de copiarlo recibe la respuesta, no
+un 404. No hay enlace hacia él desde ninguna parte del sitio; se llega solo desde el banner.
+
+Sus cuatro primeras claves —`rol`, `stack`, `cloud` y `modo`— son exactamente las que
+muestra el banner, en el mismo orden. **Si cambia el texto del banner, hay que cambiarlas
+acá también.** El resto del archivo amplía: las tres áreas, los tres casos con su resultado
+y su ancla en el sitio, y el contacto.
+
+No necesita configuración: Cloudflare lo sirve como `application/json` por la extensión.
 
 ## Decisiones de diseño
 

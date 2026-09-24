@@ -1,0 +1,44 @@
+{
+  "rol": "Ingeniero backend senior",
+  "stack": ["Node.js", "TypeScript", "Kubernetes"],
+  "cloud": ["Azure", "AWS"],
+  "modo": "Remoto desde Chile",
+
+  "sitio": "https://pedescoces.cl/",
+  "programando_desde": "2014-11",
+
+  "areas": [
+    "Arquitectura y migración",
+    "Observabilidad y diagnóstico",
+    "Rendimiento y escalabilidad"
+  ],
+
+  "casos": [
+    {
+      "titulo": "Cuando la plataforma apaga el runtime bajo tus pies",
+      "area": "Arquitectura y migración",
+      "resultado": "Backend completo migrado a Kubernetes en 3 meses, con un equipo de 2, frente a los 12 que tomaba migrar función por función",
+      "url": "https://pedescoces.cl/#caso-1"
+    },
+    {
+      "titulo": "Construir el framework que el runtime no traía",
+      "area": "Observabilidad y diagnóstico",
+      "resultado": "Diagnosticar en producción pasó de esperar 5 minutos a buscar en segundos; de 10-30 llamadas HTTP por request a 1 envío por lote",
+      "url": "https://pedescoces.cl/#caso-2"
+    },
+    {
+      "titulo": "Sacar del request lo que el jugador no necesita esperar",
+      "area": "Rendimiento y escalabilidad",
+      "resultado": "Finalizar una partida bajó de ~20 s a ~2 s; la entrega de premios, de agotar el límite de ejecución a 2-5 s",
+      "url": "https://pedescoces.cl/#caso-3"
+    }
+  ],
+
+  "contacto": {
+    "correo": "pedescoces@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/pedescoces/",
+    "github": "https://github.com/Therilion"
+  },
+
+  "ps": "Si llegaste hasta acá copiando el comando del banner, el comando funcionaba. Escríbeme."
+}
