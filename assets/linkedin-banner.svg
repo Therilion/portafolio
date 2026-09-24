@@ -26,7 +26,8 @@
 
       <text x="425.0" y="113" font-family="IBM Plex Mono" font-size="24" fill="#e0a13a">$</text>
       <text x="453.8" y="113" font-family="IBM Plex Mono" font-size="24" fill="#f3f1e8">curl -s</text>
-      <text x="569.0" y="113" font-family="IBM Plex Mono" font-size="24" fill="#e0a13a">pedescoces.cl/perfil.json</text>
+      <text x="569.0" y="113" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">https://</text>
+      <text x="684.2" y="113" font-family="IBM Plex Mono" font-size="24" fill="#e0a13a">pedescoces.cl/perfil.json</text>
       <text x="425.0" y="146" font-family="IBM Plex Mono" font-size="24" fill="#5d6d71">{</text>
       <text x="453.8" y="179" font-family="IBM Plex Mono" font-size="24" fill="#9ba5a3">&quot;rol&quot;:</text>
       <text x="583.4" y="179" font-family="IBM Plex Mono" font-size="24" fill="#f3f1e8">&quot;Ingeniero backend senior&quot;</text>

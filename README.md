@@ -101,9 +101,14 @@ y la alineación de las claves del JSON depende de que cada carácter caiga en s
 
 ### `perfil.json`
 
-El banner muestra `curl -s pedescoces.cl/perfil.json`, así que el archivo existe y el
-comando funciona de verdad: quien se tome la molestia de copiarlo recibe la respuesta, no
-un 404. No hay enlace hacia él desde ninguna parte del sitio; se llega solo desde el banner.
+El banner muestra `curl -s https://pedescoces.cl/perfil.json`, así que el archivo existe y
+el comando funciona de verdad: quien se tome la molestia de copiarlo recibe la respuesta,
+no un 404. No hay enlace hacia él desde ninguna parte del sitio; se llega solo desde el
+banner.
+
+El esquema va explícito a propósito. Sin él, `curl` asume `http://` y *Always Use HTTPS*
+responde un 301 que `curl -s` no sigue, así que el comando imprimiría el cuerpo de la
+redirección en vez del JSON.
 
 Sus cuatro primeras claves —`rol`, `stack`, `cloud` y `modo`— son exactamente las que
 muestra el banner, en el mismo orden. **Si cambia el texto del banner, hay que cambiarlas
